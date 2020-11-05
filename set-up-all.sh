@@ -1,11 +1,7 @@
 echo "start set up!"
 
-cd apps
-sh install.sh
-cd ..
+# sh ./apps/install.sh
 
-cd files
-sh set-up.sh
-cd ..
+sh ./files/set-up.sh
 
 echo "set up end!"

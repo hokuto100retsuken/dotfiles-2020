@@ -26,5 +26,7 @@ brew install docker
 brew cask install docker
 # the_platinum_searcher
 brew install pt
+# tumx
+brew install tumx
 
 echo "install apps end!!"
