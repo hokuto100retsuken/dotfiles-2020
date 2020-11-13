@@ -4,10 +4,10 @@
 if [[ ! -n $TMUX ]]; then
     which tmux && tmux new-session
 fi
-ZSH=$HOME/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-plugins=(git vi-mode osx)
-ZSH_THEME="mh"
+# ZSH=$HOME/.oh-my-zsh
+# source $ZSH/oh-my-zsh.sh
+# plugins=(git vi-mode osx)
+# ZSH_THEME="mh"
 # wget http://mimosa-pudica.net/src/incr-0.2.zsh
 
 # SSHで接続した先で日本語が使えるようにする
@@ -27,7 +27,6 @@ export PATH=/usr/local/opt:/opt/local/bin:/opt/local/sbin:/opt/local/include:/us
 
 #packer
 export PACKER_ROOT="$HOME/packer"
-PATH="$PACKER_ROOT:$RBENV_ROOT/bin:$PATH"
 
 # -------------------------------------
 # zshのオプション
@@ -385,24 +384,19 @@ zstyle ':chpwd:*' recent-dirs-default true
 # brew install ctags
 alias ctags="`brew --prefix`/bin/ctags" 
 
-#source ~/.zshenv
-
 # added by travis gem
 [ -f /Users/pyama/.travis/travis.sh ] && source /Users/pyama/.travis/travis.sh
-
-export PATH="$HOME/.yarn/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/vault vault
 
-# k8s
-alias k='kubectl-cluster-caution'
-source <(k completion zsh | gsed -e 's/__start_kubectl kubectl/__start_kubectl kubectl-cluster-caution/g')
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-PS1='$(kube_ps1)'$PS1
+# # k8s
+# alias k='kubectl-cluster-caution'
+# source <(k completion zsh | gsed -e 's/__start_kubectl kubectl/__start_kubectl kubectl-cluster-caution/g')
+# source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+# PS1='$(kube_ps1)'$PS1
 
+# peco
 function peco-ssh() {
     local host_ip=$(cat ~/hosts| peco --query "$LBUFFER")
     if [ -n "$host_ip" ]; then
