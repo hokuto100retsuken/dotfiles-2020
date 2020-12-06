@@ -10,6 +10,8 @@ fi
 # ZSH_THEME="mh"
 # wget http://mimosa-pudica.net/src/incr-0.2.zsh
 
+eval "$(anyenv init -)"
+
 # SSHで接続した先で日本語が使えるようにする
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
