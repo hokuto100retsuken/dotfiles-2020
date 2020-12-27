@@ -1,6 +1,6 @@
-# brew install git
+brew install git
 
-# brew install ghq 
+brew install ghq 
 
 cat <<EOF > ~/.gitconfig
 [ghq]

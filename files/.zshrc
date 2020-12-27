@@ -30,6 +30,9 @@ export PATH=/usr/local/opt:/opt/local/bin:/opt/local/sbin:/opt/local/include:/us
 #packer
 export PACKER_ROOT="$HOME/packer"
 
+# vim
+export PATH="/usr/local/bin:$PATH"
+
 # -------------------------------------
 # zshのオプション
 # -------------------------------------

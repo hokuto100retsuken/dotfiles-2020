@@ -6,12 +6,12 @@ echo "install apps!!"
 # cask
 brew install cask
 # VScode
-brew cask install visual-studio-code
+brew install --cask visual-studio-code
 # jetbrains toolbox
-brew cask install jetbrains-toolbox
+brew install --cask jetbrains-toolbox
 # alfred
-brew cask install alfred
-git & configs
+brew install --cask alfred
+# git & configs
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 sh $script_dir/git-setting.sh
 
@@ -20,13 +20,15 @@ sh $script_dir/git-setting.sh
 brew install peco
 brew install hub
 # iterm2
-brew cask install iterm2
+brew install --cask iterm2
 # docker
 brew install docker
-brew cask install docker
+brew install --cask docker
 # the_platinum_searcher
 brew install pt
 # tumx
-brew install tumx
+brew install tmux
+
+brew install reattach-to-user-namespace
 
 echo "install apps end!!"
