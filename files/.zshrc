@@ -1,9 +1,9 @@
 # -------------------------------------
 # 環境変数
 # -------------------------------------
-if [[ ! -n $TMUX ]]; then
-    which tmux && tmux new-session
-fi
+# if [[ ! -n $TMUX ]]; then
+#     which tmux && tmux new-session
+# fi
 # ZSH=$HOME/.oh-my-zsh
 # source $ZSH/oh-my-zsh.sh
 # plugins=(git vi-mode osx)
@@ -26,6 +26,8 @@ export MANPAGER=/usr/local/bin/vimpager
 # パスの設定
 export PATH=/usr/local/opt:/opt/local/bin:/opt/local/sbin:/opt/local/include:/usr/local/opt/openssl/bin/:$PATH
 
+# openssl
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 
 #packer
 export PACKER_ROOT="$HOME/packer"
@@ -413,142 +415,142 @@ function peco-ssh() {
 }
 zle -N peco-ssh
 
-function peco-docker-login() {
-    local cid=$(docker ps |grep -v 'CONTAINER ID' | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="docker exec -it $(echo $cid) /bin/bash"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-docker-login
+# function peco-docker-login() {
+#     local cid=$(docker ps |grep -v 'CONTAINER ID' | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="docker exec -it $(echo $cid) /bin/bash"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-docker-login
 
-function peco-docker-log() {
-    local cid=$(docker ps |grep -v 'CONTAINER ID' | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="docker logs -f $(echo $cid)"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-docker-log
-function peco-docker-delete() {
-    local cid=$(docker ps |grep -v 'CONTAINER ID' | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="docker rm -f $(echo $cid)"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-docker-delete
+# function peco-docker-log() {
+#     local cid=$(docker ps |grep -v 'CONTAINER ID' | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="docker logs -f $(echo $cid)"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-docker-log
+# function peco-docker-delete() {
+#     local cid=$(docker ps |grep -v 'CONTAINER ID' | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="docker rm -f $(echo $cid)"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-docker-delete
 
-function peco-kube-namespace() {
-    local cid=$(kubectl get namespace |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="kubectl config set-context $(kubectl config current-context) --namespace=$(echo $cid)"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-kube-namespace
-function peco-kube-context() {
-    local cid=$(kubectx | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="kubectx $cid"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-kube-context
+# function peco-kube-namespace() {
+#     local cid=$(kubectl get namespace |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="kubectl config set-context $(kubectl config current-context) --namespace=$(echo $cid)"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-kube-namespace
+# function peco-kube-context() {
+#     local cid=$(kubectx | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="kubectx $cid"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-kube-context
 
-function peco-kube-exec() {
-    local cid=$(kubectl get pods |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="kubectl exec -it $(echo $cid) /bin/bash"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-kube-exec
+# function peco-kube-exec() {
+#     local cid=$(kubectl get pods |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="kubectl exec -it $(echo $cid) /bin/bash"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-kube-exec
 
-function peco-kube-logs() {
-    local cid=$(kubectl get pods |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="kubectl logs $(echo $cid)"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-kube-logs
+# function peco-kube-logs() {
+#     local cid=$(kubectl get pods |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="kubectl logs $(echo $cid)"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-kube-logs
 
-function peco-kube-delete-pods() {
-    local cid=$(kubectl get pods |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="kubectl delete pods $(echo $cid)"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-kube-delete-pods
+# function peco-kube-delete-pods() {
+#     local cid=$(kubectl get pods |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="kubectl delete pods $(echo $cid)"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-kube-delete-pods
 
-function peco-kube-describe-pods() {
-    local cid=$(kubectl get pods |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
-    if [ -n "$cid" ]; then
-      BUFFER="kubectl describe pods $(echo $cid)"
-      CURSOR=$#BUFFER
-      zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-kube-describe-pods
+# function peco-kube-describe-pods() {
+#     local cid=$(kubectl get pods |grep -v 'NAME' | peco --query "$LBUFFER"| cut -d ' ' -f1)
+#     if [ -n "$cid" ]; then
+#       BUFFER="kubectl describe pods $(echo $cid)"
+#       CURSOR=$#BUFFER
+#       zle accept-line
+#     fi
+#     zle clear-screen
+# }
+# zle -N peco-kube-describe-pods
 
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
-export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# export PATH="/usr/local/opt/openssl/bin:$PATH"
+# export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
+# export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+# export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-function ssh() { # tmux起動時
-    if [[ -n $(printenv TMUX) ]] ; then
-        # 現在のペインIDを退避
-        local pane_id=$(tmux display -p '#{pane_id}')
+# function ssh() { # tmux起動時
+#     if [[ -n $(printenv TMUX) ]] ; then
+#         # 現在のペインIDを退避
+#         local pane_id=$(tmux display -p '#{pane_id}')
 
-        hostAddr=notfound
-        for arg in $@
-        do
-          (echo $arg | grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$" > /dev/null) && hostAddr=$arg
-        done
-        name=$(grep $hostAddr  ~/hosts | awk '{ print $2 }')
-        if [[ `echo $name | grep 'staging'` ]] ; then
-            tmux select-pane -t $pane_id -P 'default'
-        elif [[ `echo $name | grep 'dev'` ]] ; then
-            tmux select-pane -t $pane_id -P 'default'
-        else
-            # prod
-            tmux select-pane -P 'bg=colour52,fg=white'
-        fi
+#         hostAddr=notfound
+#         for arg in $@
+#         do
+#           (echo $arg | grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$" > /dev/null) && hostAddr=$arg
+#         done
+#         name=$(grep $hostAddr  ~/hosts | awk '{ print $2 }')
+#         if [[ `echo $name | grep 'staging'` ]] ; then
+#             tmux select-pane -t $pane_id -P 'default'
+#         elif [[ `echo $name | grep 'dev'` ]] ; then
+#             tmux select-pane -t $pane_id -P 'default'
+#         else
+#             # prod
+#             tmux select-pane -P 'bg=colour52,fg=white'
+#         fi
 
-        # 通常通りssh続行
-        command ssh $@
+#         # 通常通りssh続行
+#         command ssh $@
 
-        # デフォルトの背景色に戻す
-        tmux select-pane -t $pane_id -P 'default'
-    fi
-}
+#         # デフォルトの背景色に戻す
+#         tmux select-pane -t $pane_id -P 'default'
+#     fi
+# }
 
-function nodes() {
-  ls nodes |grep -v staging | xargs -n1 -I@ cat nodes/@ | jq -c -r '[.normal.knife_zero.host, .name] | @csv' | sed -e 's/"//g' -e 's/,/ /g' |grep -v 10.51.78
-}
+# function nodes() {
+#   ls nodes |grep -v staging | xargs -n1 -I@ cat nodes/@ | jq -c -r '[.normal.knife_zero.host, .name] | @csv' | sed -e 's/"//g' -e 's/,/ /g' |grep -v 10.51.78
+# }
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/pyama/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/pyama/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f '/Users/pyama/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/pyama/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/pyama/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/pyama/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f '/Users/pyama/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/pyama/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
