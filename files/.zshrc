@@ -10,30 +10,13 @@
 # ZSH_THEME="mh"
 # wget http://mimosa-pudica.net/src/incr-0.2.zsh
 
+# anyenv 初期設定
 eval "$(anyenv init -)"
 
 # SSHで接続した先で日本語が使えるようにする
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# エディタ
-export EDITOR=/usr/local/bin/vim
-
-# ページャ
-export PAGER=/usr/local/bin/vimpager
-export MANPAGER=/usr/local/bin/vimpager
-
-# パスの設定
-export PATH=/usr/local/opt:/opt/local/bin:/opt/local/sbin:/opt/local/include:/usr/local/opt/openssl/bin/:$PATH
-
-# openssl
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-
-#packer
-export PACKER_ROOT="$HOME/packer"
-
-# vim
-export PATH="/usr/local/bin:$PATH"
 
 # -------------------------------------
 # zshのオプション
@@ -137,9 +120,29 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 setopt hist_ignore_dups     # ignore duplication command history list
+
 # -------------------------------------
 # パス
 # -------------------------------------
+
+# パスの設定
+export PATH=/usr/local/opt:/opt/local/bin:/opt/local/sbin:/opt/local/include:/usr/local/opt/openssl/bin/:$PATH
+
+# エディタ
+export EDITOR=/usr/local/bin/vim
+
+# vim
+export PATH="/usr/local/bin:$PATH"
+
+# ページャ
+export PAGER=/usr/local/bin/vimpager
+export MANPAGER=/usr/local/bin/vimpager
+
+# openssl
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+
+#packer
+export PACKER_ROOT="$HOME/packer"
 
 # 重複する要素を自動的に削除
 typeset -U path cdpath fpath manpath
@@ -222,10 +225,10 @@ alias glint='golint ./... | grep -v vendor'
 alias tk='tmux kill-session'
 alias cn='terminal-notifier -message "done command"'
 
-alias vi="reattach-to-user-namespace /usr/local/bin/vim"
-alias vim="reattach-to-user-namespace /usr/local/bin/vim"
-alias view="reattach-to-user-namespace view"
-alias tig="reattach-to-user-namespace tig"
+# alias vi="reattach-to-user-namespace /usr/local/bin/vim"
+# alias vim="reattach-to-user-namespace /usr/local/bin/vim"
+# alias view="reattach-to-user-namespace view"
+# alias tig="reattach-to-user-namespace tig"
 alias ssh='TERM=xterm ssh'
 
 # -------------------------------------
@@ -249,7 +252,6 @@ if [ `which peco >/dev/null 2>&1 ; echo $?` -eq 0 ]; then
   bindkey '^kd'  peco-kube-delete-pods
   bindkey '^ks'  peco-kube-describe-pods
   bindkey '^kc'  peco-kube-context
-
 fi
 
 # -------------------------------------
@@ -273,7 +275,6 @@ zle -N peco-src
 
 
 function peco-branch() {
-
     # commiterdate:relativeを commiterdate:localに変更すると普通の時刻表示
     local selected_line="$(git for-each-ref --format='%(refname:short) | %(committerdate:relative) | %(committername) | %(subject)' --sort=-committerdate refs/heads refs/remotes \
         | column -t -s '|' \
@@ -554,3 +555,6 @@ zle -N peco-ssh
 
 # The next line enables shell command completion for gcloud.
 # if [ -f '/Users/pyama/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/pyama/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# wsl brew設定
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
